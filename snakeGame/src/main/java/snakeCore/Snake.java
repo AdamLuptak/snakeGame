@@ -4,7 +4,14 @@ public class Snake extends GameElement {
 
 	private String[] snakeBody;
 
+	private String snakeBodyChar;
+
 	private int maxSnakeLength;
+
+	public Snake(int maxSnakeLength, String snakeBodychar) {
+		this.maxSnakeLength = maxSnakeLength;
+		this.snakeBodyChar = snakeBodychar;
+	}
 
 	public int getMaxSnakeLength() {
 		return maxSnakeLength;
@@ -18,6 +25,10 @@ public class Snake extends GameElement {
 		return snakeBody;
 	}
 
+	public String getSnakeBodyChar() {
+		return snakeBodyChar;
+	}
+
 	public void setSnakeBody(String[] snakeBody) {
 		this.snakeBody = snakeBody;
 	}
@@ -25,10 +36,6 @@ public class Snake extends GameElement {
 	@Override
 	public String toString() {
 
-		StringBuilder sb = new StringBuilder();
-		for (String body : snakeBody) {
-			sb.append(body);
-		}
-		return sb.toString();
+		return snakeBodyChar.toString();
 	}
 }

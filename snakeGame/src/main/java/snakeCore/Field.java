@@ -1,8 +1,6 @@
 package snakeCore;
 
-
-
-import java.util.Arrays;
+import java.util.*;
 
 public class Field {
 
@@ -13,17 +11,20 @@ public class Field {
 	private int columnCount;
 
 	private GameState gameState = GameState.Playing;
-	
+
+	private RandomPosition rp;
+
 	public Field(int rowCount, int columnCount) {
 		this.columnCount = columnCount;
 		this.rowCount = rowCount;
 		this.field = new GameElement[rowCount][columnCount];
+		rp = new RandomPosition(rowCount - 1, 1, columnCount - 1, 1);
 		GenerateField();
 	}
 
 	/**
 	 * Generate playing field with snake and bordes and food for snake
-	 * */
+	 */
 	private void GenerateField() {
 
 		for (int row = 0; row < rowCount; row++) {
@@ -34,23 +35,28 @@ public class Field {
 				} else {
 					field[row][column] = new FreeSpace();
 				}
-				//random put snake inside
-				putSnakeRandom();
-				//put food randomnside of playing field
-				putFoodRandom();
+
 			}
 		}
+
+		putSnakeRandom(rp.getRowPosition(), rp.getColumnPosition());
+		putFoodRandom(rp.getRowPosition(), rp.getColumnPosition());
 
 	}
 
 	private void putFoodRandom() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
-	private void putSnakeRandom() {
-		
-		
+	private void putSnakeRandom(int row, int column) {
+		GameElement gameElement = field[row][column];
+		if (gameElement instanceof Food) {
+			putSnakeRandom(rp.getRowPosition(), rp.getColumnPosition());
+		} else {
+			field[row][column] = new Food();
+		}
+
 	}
 
 	public GameElement getFieldElement(int row, int column) {

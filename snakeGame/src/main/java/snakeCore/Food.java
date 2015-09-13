@@ -1,6 +1,6 @@
 package snakeCore;
 
-public class food extends GameElement {
+public class Food extends GameElement {
 
 	@Override
 	public String toString() {
